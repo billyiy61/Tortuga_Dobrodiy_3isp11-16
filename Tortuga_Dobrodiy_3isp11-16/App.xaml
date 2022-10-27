@@ -1,0 +1,9 @@
+﻿<Application x:Class="Tortuga_Dobrodiy_3isp11_16.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Tortuga_Dobrodiy_3isp11_16"
+             StartupUri="Win/StartWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

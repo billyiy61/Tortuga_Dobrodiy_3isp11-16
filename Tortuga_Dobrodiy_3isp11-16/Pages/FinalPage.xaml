@@ -1,0 +1,34 @@
+﻿<Page x:Class="Tortuga_Dobrodiy_3isp11_16.Pages.FinalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tortuga_Dobrodiy_3isp11_16.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FinalPage">
+
+    <Grid Background="white">
+        <TextBlock Text="Спасибо за заказ, ожидайте!"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   Margin="0 50 0 0"/>
+
+
+        <StackPanel>
+
+            <TextBlock Text="Вернуться назад"
+                   FontSize="15"
+                   HorizontalAlignment="Center"
+                   Margin="0 150 0 0"/>
+            <Button x:Name="backToStartBtn"
+                    Click="backToStartBtn_Click"
+                    Height="35"
+                    Content="go"
+                    Width="60"/>
+        </StackPanel>
+
+        <Frame x:Name="FinalPageFrame"
+               />
+    </Grid>
+</Page>

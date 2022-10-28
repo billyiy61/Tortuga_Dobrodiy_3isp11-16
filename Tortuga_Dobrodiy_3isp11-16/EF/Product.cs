@@ -18,7 +18,7 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
         public Product()
         {
             this.Order = new HashSet<Order>();
-            this.ProductTag = new HashSet<ProductTag>();
+            this.Tag = new HashSet<Tag>();
         }
     
         public int IDProduct { get; set; }
@@ -26,12 +26,11 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public string PhotoPath { get; set; }
-
         public int Qty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductTag> ProductTag { get; set; }
+        public virtual ICollection<Tag> Tag { get; set; }
     }
 }

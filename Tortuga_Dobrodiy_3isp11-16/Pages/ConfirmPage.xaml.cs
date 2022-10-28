@@ -25,102 +25,115 @@ namespace Tortuga_Dobrodiy_3isp11_16.Pages
     /// </summary>
     public partial class ConfirmPage : Page
     {
+        List<EF.PaymentType> ptList = new List<PaymentType>();
+        
         public ConfirmPage()
         {
             InitializeComponent();
+            FinalCosttxt.Text = Convert.ToString(productsForSale.FinalTotalPrice);
 
-            EF.Order ord = new Order();
+            List<String> ptListStr = new List<string>();
 
+            ptList = context.PaymentType.ToList();
 
-            EF.ProductSale check = new ProductSale();
-            check.SaleDate = DateTime.Now;
-            //check.ClientName = ;
-            //check.IDEmployee = ClassEntities.IDEmployee;
-            //check.TotalPrice = Convert.ToDecimal(FinalCosttxt.Text);
-
-            context.ProductSale.Add(check);
-            context.SaveChanges();
-
-            int n = products1.Count();
-
-            EF.Product[] arr = new Product[n];
-
-            arr = products1.ToArray();
-
-            for (int i = 0; i < n; i++)
+            EF.PaymentType[] paymentTypes = new PaymentType[ptList.Count()];
+            paymentTypes = ptList.ToArray();
+            for (int i = 0; i < paymentTypes.Length; i++)
             {
-                EF.Product p = arr[i];
-
-                ord.IDProduct = arr[i].IDProduct;
-                //ord.IDProductSale = check.IDProductSale;
-                //ord.Qty = productsForSale.products1.Find(t => t.IDProduct == p.IDProduct).Qty;
-
-                context.Order.Add(ord);
-                context.SaveChanges();
-
+                ptListStr.Add(paymentTypes[i].Title);
             }
+            
 
+            PaymentTypeCmbbx.ItemsSource = ptListStr;
+            AllProducts.ItemsSource = prods;
 
-
-
-            //txtIDClient.Text = Convert.ToString(1);
-
-            //productsForSale.products1.Clear();
-
-            //AllProdForSale.ItemsSource = productsForSale.products1.ToList();
-            //FinalCosttxt.Text = Convert.ToString(Calculation.CostCalc(ClientDisc));
-
-            MessageBox.Show("Заказ оплачен");
-            //foreach (var item in productsForSale.products1)
-            //{
-
-
-
+            
+           
         }
 
         private void PayBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                
+                if (prods.Count != 0)
+                {
+                    EF.Order ord = new Order();
+                    EF.ProductSale check = new ProductSale();
+                    check.SaleDate = DateTime.Now;
+                    check.TableNum = Convert.ToInt32(txtTableNum.Text);
+                    check.IDPayment = ptList.Find(x => x.Title == PaymentTypeCmbbx.Text).IDPayment;
+                    check.ReadyTime = DateTime.Now;
+                    check.ClientName = txtClientName.Text;
+                    check.Price = Convert.ToDecimal(FinalCosttxt.Text);
 
+                    context.ProductSale.Add(check);
+                    context.SaveChanges();
+
+                    int n = prods.Count();
+
+
+                    Prods[] prods1 = new Prods[prods.Count()];
+                    prods1 = prods.ToArray();
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        ord.IDProduct = prods1[i].IDProduct;
+                        ord.IDProductSale = check.IDProductSale;
+                        ord.Qty = prods1[i].Qty;
+
+                        context.Order.Add(ord);
+                        context.SaveChanges();
+
+                    }
+                    MessageBox.Show("Заказ оплачен");
+                    ConfirmFrame.Navigate(new FinalPage());
+                }
+                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка");
+                throw;
+            }
+            
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        private void txtClientName_GotFocus(object sender, RoutedEventArgs e)
         {
-
+            if (txtClientName.Text == "Имя")
+            {
+                txtClientName.Text = "";
+            }
         }
 
-        private void txtIDClient_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtClientName_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            if (txtClientName.Text == "")
+            {
+                txtClientName.Text = "Имя";
+            }
         }
 
-        private void txtIDClient_GotFocus(object sender, RoutedEventArgs e)
+        private void txtTableNum_GotFocus(object sender, RoutedEventArgs e)
         {
-
+            if (txtTableNum.Text == "***")
+            {
+                txtTableNum.Text = "";
+            }
         }
 
-        private void txtIDClient_LostFocus(object sender, RoutedEventArgs e)
+        private void txtTableNum_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            if (txtTableNum.Text == "")
+            {
+                txtTableNum.Text = "***";
+            }
         }
 
-        private void txtDiscountNew_TextChanged(object sender, TextChangedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void txtDiscountNew_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void txtDiscountNew_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddProduct_Click(object sender, RoutedEventArgs e)
-        {
-
+            ConfirmFrame.Navigate(new CartPage());
         }
     }
 }

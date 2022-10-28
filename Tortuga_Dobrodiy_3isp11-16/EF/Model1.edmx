@@ -37,16 +37,19 @@
           </Key>
           <Property Name="IDProductSale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SaleDate" Type="datetime" Nullable="false" />
-          <Property Name="TableNum" Type="tinyint" Nullable="false" />
+          <Property Name="TableNum" Type="int" Nullable="false" />
           <Property Name="IDPayment" Type="int" Nullable="false" />
           <Property Name="ReadyTime" Type="datetime" Nullable="false" />
           <Property Name="ClientName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Tortuga_Dobrodiy.dbo.ProductTag" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ProductTag">
           <Key>
-            <PropertyRef Name="IDProductTag" />
+            <PropertyRef Name="IDProduct" />
+            <PropertyRef Name="IDTag" />
           </Key>
-          <Property Name="IDProductTag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDProduct" Type="int" Nullable="false" />
           <Property Name="IDTag" Type="int" Nullable="false" />
         </EntityType>
@@ -68,17 +71,18 @@
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Tortuga_Dobrodiy.dbo.vw_ProdSaleOrder" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="vw_ProdSaleOrder">
+предупреждение 6002: В таблице или представлении "Tortuga_Dobrodiy.dbo.vw_ProdTag" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="vw_ProdTag">
           <Key>
-            <PropertyRef Name="ClientName" />
-            <PropertyRef Name="IDProductSale" />
-            <PropertyRef Name="SaleDate" />
+            <PropertyRef Name="IDprod" />
+            <PropertyRef Name="ProdTitle" />
+            <PropertyRef Name="IDtag" />
+            <PropertyRef Name="TagTitle" />
           </Key>
-          <Property Name="ClientName" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="IDProductSale" Type="int" Nullable="false" />
-          <Property Name="SaleDate" Type="datetime" Nullable="false" />
-          <Property Name="TotalPrice" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="IDprod" Type="int" Nullable="false" />
+          <Property Name="ProdTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IDtag" Type="int" Nullable="false" />
+          <Property Name="TagTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Order_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -176,16 +180,21 @@
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSale" EntityType="Self.ProductSale" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductTag" EntityType="Self.ProductTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vw_ProdSaleOrder" EntityType="Self.vw_ProdSaleOrder" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="ProductTag" EntityType="Self.ProductTag" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vw_ProdSaleOrder].[ClientName] AS [ClientName], 
-    [vw_ProdSaleOrder].[IDProductSale] AS [IDProductSale], 
-    [vw_ProdSaleOrder].[SaleDate] AS [SaleDate], 
-    [vw_ProdSaleOrder].[TotalPrice] AS [TotalPrice]
-    FROM [dbo].[vw_ProdSaleOrder] AS [vw_ProdSaleOrder]</DefiningQuery>
+    [ProductTag].[IDProduct] AS [IDProduct], 
+    [ProductTag].[IDTag] AS [IDTag]
+    FROM [dbo].[ProductTag] AS [ProductTag]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_ProdTag" EntityType="Self.vw_ProdTag" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ProdTag].[IDprod] AS [IDprod], 
+    [vw_ProdTag].[ProdTitle] AS [ProdTitle], 
+    [vw_ProdTag].[IDtag] AS [IDtag], 
+    [vw_ProdTag].[TagTitle] AS [TagTitle]
+    FROM [dbo].[vw_ProdTag] AS [vw_ProdTag]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Order_Product" Association="Self.FK_Order_Product">
             <End Role="Product" EntitySet="Product" />
@@ -247,10 +256,9 @@
           <EntitySet Name="PaymentType" EntityType="Tortuga_DobrodiyModel.PaymentType" />
           <EntitySet Name="Product" EntityType="Tortuga_DobrodiyModel.Product" />
           <EntitySet Name="ProductSale" EntityType="Tortuga_DobrodiyModel.ProductSale" />
-          <EntitySet Name="ProductTag" EntityType="Tortuga_DobrodiyModel.ProductTag" />
           <EntitySet Name="sysdiagrams" EntityType="Tortuga_DobrodiyModel.sysdiagrams" />
           <EntitySet Name="Tag" EntityType="Tortuga_DobrodiyModel.Tag" />
-          <EntitySet Name="vw_ProdSaleOrder" EntityType="Tortuga_DobrodiyModel.vw_ProdSaleOrder" />
+          <EntitySet Name="vw_ProdTag" EntityType="Tortuga_DobrodiyModel.vw_ProdTag" />
           <AssociationSet Name="FK_Order_Product" Association="Tortuga_DobrodiyModel.FK_Order_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Order" EntitySet="Order" />
@@ -263,15 +271,11 @@
             <End Role="PaymentType" EntitySet="PaymentType" />
             <End Role="ProductSale" EntitySet="ProductSale" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductTag_Product" Association="Tortuga_DobrodiyModel.FK_ProductTag_Product">
+          <AssociationSet Name="ProductTag" Association="Tortuga_DobrodiyModel.ProductTag">
             <End Role="Product" EntitySet="Product" />
-            <End Role="ProductTag" EntitySet="ProductTag" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductTag_Tag" Association="Tortuga_DobrodiyModel.FK_ProductTag_Tag">
             <End Role="Tag" EntitySet="Tag" />
-            <End Role="ProductTag" EntitySet="ProductTag" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -312,7 +316,7 @@
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="PhotoPath" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Order" Relationship="Tortuga_DobrodiyModel.FK_Order_Product" FromRole="Product" ToRole="Order" />
-          <NavigationProperty Name="ProductTag" Relationship="Tortuga_DobrodiyModel.FK_ProductTag_Product" FromRole="Product" ToRole="ProductTag" />
+          <NavigationProperty Name="Tag" Relationship="Tortuga_DobrodiyModel.ProductTag" FromRole="Product" ToRole="Tag" />
         </EntityType>
         <EntityType Name="ProductSale">
           <Key>
@@ -320,22 +324,13 @@
           </Key>
           <Property Name="IDProductSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TableNum" Type="Byte" Nullable="false" />
+          <Property Name="TableNum" Type="Int32" Nullable="false" />
           <Property Name="IDPayment" Type="Int32" Nullable="false" />
           <Property Name="ReadyTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ClientName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="Order" Relationship="Tortuga_DobrodiyModel.FK_Order_ProductSale" FromRole="ProductSale" ToRole="Order" />
           <NavigationProperty Name="PaymentType" Relationship="Tortuga_DobrodiyModel.FK_ProductSale_PaymentType" FromRole="ProductSale" ToRole="PaymentType" />
-        </EntityType>
-        <EntityType Name="ProductTag">
-          <Key>
-            <PropertyRef Name="IDProductTag" />
-          </Key>
-          <Property Name="IDProductTag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDProduct" Type="Int32" Nullable="false" />
-          <Property Name="IDTag" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Tortuga_DobrodiyModel.FK_ProductTag_Product" FromRole="ProductTag" ToRole="Product" />
-          <NavigationProperty Name="Tag" Relationship="Tortuga_DobrodiyModel.FK_ProductTag_Tag" FromRole="ProductTag" ToRole="Tag" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -353,18 +348,19 @@
           </Key>
           <Property Name="IDTag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductTag" Relationship="Tortuga_DobrodiyModel.FK_ProductTag_Tag" FromRole="Tag" ToRole="ProductTag" />
+          <NavigationProperty Name="Product" Relationship="Tortuga_DobrodiyModel.ProductTag" FromRole="Tag" ToRole="Product" />
         </EntityType>
-        <EntityType Name="vw_ProdSaleOrder">
+        <EntityType Name="vw_ProdTag">
           <Key>
-            <PropertyRef Name="ClientName" />
-            <PropertyRef Name="IDProductSale" />
-            <PropertyRef Name="SaleDate" />
+            <PropertyRef Name="IDprod" />
+            <PropertyRef Name="ProdTitle" />
+            <PropertyRef Name="IDtag" />
+            <PropertyRef Name="TagTitle" />
           </Key>
-          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="IDProductSale" Type="Int32" Nullable="false" />
-          <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="IDprod" Type="Int32" Nullable="false" />
+          <Property Name="ProdTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IDtag" Type="Int32" Nullable="false" />
+          <Property Name="TagTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Order_Product">
           <End Type="Tortuga_DobrodiyModel.Product" Role="Product" Multiplicity="1" />
@@ -402,31 +398,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductTag_Product">
-          <End Type="Tortuga_DobrodiyModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="Tortuga_DobrodiyModel.ProductTag" Role="ProductTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="IDProduct" />
-            </Principal>
-            <Dependent Role="ProductTag">
-              <PropertyRef Name="IDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="ProductTag">
+          <End Type="Tortuga_DobrodiyModel.Product" Role="Product" Multiplicity="*" />
+          <End Type="Tortuga_DobrodiyModel.Tag" Role="Tag" Multiplicity="*" />
         </Association>
-        <Association Name="FK_ProductTag_Tag">
-          <End Type="Tortuga_DobrodiyModel.Tag" Role="Tag" Multiplicity="1" />
-          <End Type="Tortuga_DobrodiyModel.ProductTag" Role="ProductTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tag">
-              <PropertyRef Name="IDTag" />
-            </Principal>
-            <Dependent Role="ProductTag">
-              <PropertyRef Name="IDTag" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -488,21 +464,13 @@
           <EntitySetMapping Name="ProductSale">
             <EntityTypeMapping TypeName="Tortuga_DobrodiyModel.ProductSale">
               <MappingFragment StoreEntitySet="ProductSale">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
                 <ScalarProperty Name="ReadyTime" ColumnName="ReadyTime" />
                 <ScalarProperty Name="IDPayment" ColumnName="IDPayment" />
                 <ScalarProperty Name="TableNum" ColumnName="TableNum" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="IDProductSale" ColumnName="IDProductSale" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductTag">
-            <EntityTypeMapping TypeName="Tortuga_DobrodiyModel.ProductTag">
-              <MappingFragment StoreEntitySet="ProductTag">
-                <ScalarProperty Name="IDTag" ColumnName="IDTag" />
-                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
-                <ScalarProperty Name="IDProductTag" ColumnName="IDProductTag" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -525,17 +493,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vw_ProdSaleOrder">
-            <EntityTypeMapping TypeName="Tortuga_DobrodiyModel.vw_ProdSaleOrder">
-              <MappingFragment StoreEntitySet="vw_ProdSaleOrder">
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
-                <ScalarProperty Name="IDProductSale" ColumnName="IDProductSale" />
-                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <EntitySetMapping Name="vw_ProdTag">
+            <EntityTypeMapping TypeName="Tortuga_DobrodiyModel.vw_ProdTag">
+              <MappingFragment StoreEntitySet="vw_ProdTag">
+                <ScalarProperty Name="TagTitle" ColumnName="TagTitle" />
+                <ScalarProperty Name="IDtag" ColumnName="IDtag" />
+                <ScalarProperty Name="ProdTitle" ColumnName="ProdTitle" />
+                <ScalarProperty Name="IDprod" ColumnName="IDprod" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <AssociationSetMapping Name="ProductTag" TypeName="Tortuga_DobrodiyModel.ProductTag" StoreEntitySet="ProductTag">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="IDTag" ColumnName="IDTag" />
+            </EndProperty>
+            <EndProperty Name="Product">
+              <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

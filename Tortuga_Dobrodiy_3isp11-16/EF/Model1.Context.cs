@@ -31,10 +31,9 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
         public virtual DbSet<PaymentType> PaymentType { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductSale> ProductSale { get; set; }
-        public virtual DbSet<ProductTag> ProductTag { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
-        public virtual DbSet<vw_ProdSaleOrder> vw_ProdSaleOrder { get; set; }
+        public virtual DbSet<vw_ProdTag> vw_ProdTag { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

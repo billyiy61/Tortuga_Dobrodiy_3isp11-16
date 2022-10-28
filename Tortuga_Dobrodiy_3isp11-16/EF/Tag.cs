@@ -17,13 +17,13 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tag()
         {
-            this.ProductTag = new HashSet<ProductTag>();
+            this.Product = new HashSet<Product>();
         }
     
         public int IDTag { get; set; }
         public string Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductTag> ProductTag { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

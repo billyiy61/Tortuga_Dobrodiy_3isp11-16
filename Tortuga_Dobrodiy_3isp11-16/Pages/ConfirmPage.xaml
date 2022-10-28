@@ -360,7 +360,7 @@
     <Grid Background="#e8e8e8">
         <Grid.RowDefinitions>
             <RowDefinition Height="58"/>
-            <RowDefinition Height="62"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="540"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -375,18 +375,19 @@
                 />
 
         <Button Style="{DynamicResource ButtonStyle2}"
-                x:Name="Close"
+                x:Name="Back"
                 Height="34"
                 Width="48"
                 Content="назад"
                 Foreground="Black"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
-                Margin="0 24 24 0" Click="Close_Click" 
+                Margin="0 24 24 0" Click="Back_Click" 
                 BorderBrush="{x:Null}" 
                 Background="Red"  
-                >
-        </Button>
+                />
+
+        
 
 
 
@@ -420,7 +421,7 @@
         <StackPanel 
                 Grid.Row="1"
                 Margin="24,0,24,513"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Top"
                 Background="{x:Null}" Height="89" Grid.RowSpan="2"
             Orientation="Horizontal"
                 >
@@ -430,7 +431,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBox
                     Text="Имя"
-                x:Name="txtIDClient"
+                x:Name="txtClientName"
                 FontSize="16"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Left"
@@ -440,15 +441,14 @@
                 Margin="0 12 10 0"
                 Background="#f8f8f8"
                 BorderBrush="Transparent"
-                TextChanged="txtIDClient_TextChanged"
-                GotFocus="txtIDClient_GotFocus"
-                    LostFocus="txtIDClient_LostFocus"/>
+                GotFocus="txtClientName_GotFocus"
+                    LostFocus="txtClientName_LostFocus"/>
 
 
 
                     <TextBox
                     Text="***"
-                x:Name="txtDiscountNew"
+                x:Name="txtTableNum"
                 FontSize="16"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Left"
@@ -458,26 +458,70 @@
                 Margin="10 12 10 0"
                 Background="#f8f8f8"
                 BorderBrush="Transparent"
-                TextChanged="txtDiscountNew_TextChanged"
-                GotFocus="txtDiscountNew_GotFocus"
-                    LostFocus="txtDiscountNew_LostFocus"/>
+                GotFocus="txtTableNum_GotFocus"
+                    LostFocus="txtTableNum_LostFocus"/>
+
+                    <ComboBox x:Name="PaymentTypeCmbbx"
+                              Width="200"
+                              FontSize="20"/>
                 </StackPanel>
 
 
 
             </StackPanel>
 
-            <Button Content="Добавить товар"
-                    x:Name="AddProduct"
-                    Click="AddProduct_Click"
-                    Width="100"
-                    Height="50"
-                    Margin="100 0 0 0"/>
-
         </StackPanel>
 
+        <ListView x:Name="AllProducts"
+                  SelectedItem="{Binding products}"
+                  Grid.Row="2"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  
+                  BorderBrush="Transparent" >
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="LightGray"
+                Height="50">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path = Title}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                       Width="700"
+                       Margin="24 0 0 0"
+                       FontSize="20"/>
+                            <TextBlock Text="{Binding Path = Qty}"
+                       HorizontalAlignment="Left"
+                           Width="50"
+                           Margin="56 0 0 0"
+                           VerticalAlignment="Center"
+                           FontSize="20"/>
+                            <TextBlock Text="x"
+                           FontSize="20"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Path = Cost}"
+                           FontSize="20"
+                           VerticalAlignment="Center"/>
+                            <TextBlock Text=" р."
+                           FontSize="20"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
 
-       
+        <Frame x:Name="ConfirmFrame"
+               Grid.RowSpan="4"/>
+
     </Grid>
 </Page>

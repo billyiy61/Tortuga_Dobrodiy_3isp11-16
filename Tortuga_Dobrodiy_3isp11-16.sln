@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tortuga_Dobrodiy_3isp11-16", "Tortuga_Dobrodiy_3isp11-16\Tortuga_Dobrodiy_3isp11-16.csproj", "{89800F91-2805-4BAD-8A31-C2FD8A926ED3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalPriceTest", "TotalPriceTest\TotalPriceTest.csproj", "{8C54248A-53E7-479A-8D40-EBA30589FE2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{89800F91-2805-4BAD-8A31-C2FD8A926ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89800F91-2805-4BAD-8A31-C2FD8A926ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89800F91-2805-4BAD-8A31-C2FD8A926ED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C54248A-53E7-479A-8D40-EBA30589FE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C54248A-53E7-479A-8D40-EBA30589FE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C54248A-53E7-479A-8D40-EBA30589FE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C54248A-53E7-479A-8D40-EBA30589FE2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,10 +15,10 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Tortuga_DobrodiyEntities : DbContext
+    public partial class Tortuga_DobrodiyEntities1 : DbContext
     {
-        public Tortuga_DobrodiyEntities()
-            : base("name=Tortuga_DobrodiyEntities")
+        public Tortuga_DobrodiyEntities1()
+            : base("name=Tortuga_DobrodiyEntities1")
         {
         }
     
@@ -33,7 +33,10 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
         public virtual DbSet<ProductSale> ProductSale { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
+        public virtual DbSet<vw_prods> vw_prods { get; set; }
         public virtual DbSet<vw_ProdTag> vw_ProdTag { get; set; }
+        public virtual DbSet<vw_ProductsInProductSale> vw_ProductsInProductSale { get; set; }
+        public virtual DbSet<vw_pss> vw_pss { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

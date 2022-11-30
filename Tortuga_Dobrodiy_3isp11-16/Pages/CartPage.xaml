@@ -438,7 +438,8 @@
             <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
 
-        <Image Source="HeaderImage.png"/>
+        <Image Source="HeaderImage.png" Stretch="Fill"
+               />
         
         <Border Background="#000"
                 Grid.Row="1"/>
@@ -446,7 +447,8 @@
                Grid.Row="1"/>
 
         <Image Source="HeaderImage.png"
-               Grid.Row="2"/>
+               Grid.Row="2"
+               Stretch="Fill"/>
         <TextBlock
             Grid.Row="0"
                 Text="TortugaS"
@@ -513,7 +515,7 @@
 
 
         <ListView x:Name="AllProducts"
-                  SelectedItem="{Binding products}"
+                  SelectedItem="{Binding prods}"
                   Grid.Row="1"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   Margin="0 16 0 0"
@@ -547,10 +549,11 @@
 
                             <Image Source="ItemBackground.png"
                        Grid.ColumnSpan="3"
-                       Grid.RowSpan="2"/>
+                       Grid.RowSpan="2" Stretch="Fill"/>
 
                             <Image Grid.Column="1"
-                    />
+                             Source="{Binding Path = PhotoPath}"/>
+                            
                             <TextBlock Grid.Row="1"
                            Grid.ColumnSpan="3"
                            Text="{Binding Path = Title}"

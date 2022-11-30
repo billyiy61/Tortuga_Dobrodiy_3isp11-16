@@ -437,7 +437,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="HeaderImage.png"/>
+        <Image Source="HeaderImage.png"
+               Stretch="Fill"/>
         <TextBlock
             Grid.Row="0"
                 Text="TortugaS"
@@ -487,6 +488,16 @@
                   Margin="-20 24 0 0" 
                   />
 
+        <Button Content="Применить"
+                Grid.Row="1"
+                Width="100"
+                Height="35"
+                VerticalAlignment="Center"
+                Margin="310 24 0 0"
+                Style="{DynamicResource ButtonStyle4}"
+                x:Name="TagConfBtn"
+                Click="TagConfBtn_Click"/>
+
 
         <ListView x:Name="AllProducts"
                   SelectedItem="{Binding products}"
@@ -525,7 +536,8 @@
                        Grid.RowSpan="2"/>
 
                             <Image Grid.Column="1"
-                    />
+                             Source="{Binding Path = PhotoPath}"/>
+                            
                             <TextBlock Grid.Row="1"
                            Grid.ColumnSpan="3"
                            Text="{Binding Path = Title}"
@@ -597,7 +609,7 @@
                         Height="32"
                         Width="32"
                         VerticalAlignment="Bottom"
-                                    Click="PlusBtn_Click"
+                        Click="PlusBtn_Click"
                         Style="{DynamicResource BtnPM}"/>
                         </Grid>
                     </Border>

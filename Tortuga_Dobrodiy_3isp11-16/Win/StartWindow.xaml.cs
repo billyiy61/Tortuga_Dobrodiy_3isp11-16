@@ -23,11 +23,16 @@ namespace Tortuga_Dobrodiy_3isp11_16.Win
         public StartWindow()
         {
             InitializeComponent();
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
+            MessageBox.Show(Convert.ToString(dt));
         }
 
         private void EmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            this.Hide();
+            EmployeeWindow employeeWindow = new EmployeeWindow();
+            employeeWindow.ShowDialog();
             this.Close();
 
         }

@@ -16,6 +16,7 @@ using Tortuga_Dobrodiy_3isp11_16.EF;
 using static Tortuga_Dobrodiy_3isp11_16.ClassEntities;
 using static Tortuga_Dobrodiy_3isp11_16.productsForSale;
 using static Tortuga_Dobrodiy_3isp11_16.Prods;
+using static Tortuga_Dobrodiy_3isp11_16.Calculating;
 
 namespace Tortuga_Dobrodiy_3isp11_16.Pages
 {
@@ -28,30 +29,29 @@ namespace Tortuga_Dobrodiy_3isp11_16.Pages
         public CartPage()
         {
             InitializeComponent();
-            int l = orders.Count();
-            Order[] arrOrd = new Order[l];
-            arrOrd = orders.ToArray();
-            int y = arrOrd.Length;
+            //int l = orders.Count();
+            //Order[] arrOrd = new Order[l];
+            //arrOrd = orders.ToArray();
+            //int y = arrOrd.Length;
 
 
-            double TotalPrice = 0;
+            Prods[] pArr = new Prods[productsForSale.prods.Count];
+            pArr = productsForSale.prods.ToArray();
 
-            for (int i = 0; i < y; i++)
-            {
-                Order o = arrOrd[i];
-                Prods p = prods.Where(r => r.IDProduct == o.IDProduct).FirstOrDefault();
-                TotalPrice += Convert.ToDouble(o.Qty * p.Cost);
-            }
 
-           
-            AllProducts.ItemsSource = prods;
-            FinalTotalPrice = TotalPrice;
-            CostTxb.Text = Convert.ToString(TotalPrice);
+
+
+            DateTime today = System.DateTime.Now;
+
+            AllProducts.ItemsSource = productsForSale.prods.ToList();
+            FinalTotalPrice = Calculating.TotalPrice(pArr, today); 
+            CostTxb.Text = Convert.ToString(Calculating.TotalPrice(pArr, today));
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (productsForSale.products != null)
+            Prods[] pArr = new Prods[productsForSale.prods.Count()];
+            if (pArr.Length != 0)
             {
                 CartFrame.Navigate(new ConfirmPage());
             }
@@ -73,22 +73,17 @@ namespace Tortuga_Dobrodiy_3isp11_16.Pages
             if (AllProducts.SelectedItem != null)
             {
                 Object obect = (Object)AllProducts.SelectedItem;
-                EF.Product prod = (EF.Product)obect;
-                EF.Product prd = products.Where(r => r.IDProduct == prod.IDProduct).FirstOrDefault();
+                Prods prod = (Prods)obect;
+                Prods prd = productsForSale.prods.Where(k => k.IDProduct == prod.IDProduct).FirstOrDefault();
 
-                Prods pr = prods.Where(k => k.IDProduct == prd.IDProduct).FirstOrDefault();
-                EF.Order or = orders.Where(k => k.IDProduct == prd.IDProduct).FirstOrDefault();
-
-                if ((orders.Any(q => q.IDProduct == prd.IDProduct)) && (prd.Qty > 0))
+                if ((productsForSale.prods.Any(q => q.IDProduct == prd.IDProduct)) && (prd.Qty > 0))
                 {
-                    orders.Find(r => r.IDProduct == prd.IDProduct).Qty -= 1;
-                    prods.Find(k => k.IDProduct == prd.IDProduct).Qty -= 1;
-                    products.Find(t => t.IDProduct == prd.IDProduct).Qty -= 1;
+                    productsForSale.prods.Where(k => k.IDProduct == prd.IDProduct).FirstOrDefault().Qty -= 1;
+                    //products.Find(t => t.IDProduct == prd.IDProduct).Qty -= 1;
                 }
-                else 
+                else if ((productsForSale.prods.Any(q => q.IDProduct == prd.IDProduct)) && (prd.Qty < 1))
                 {
-                    prods.Remove(pr);
-                    orders.Remove(or);
+                    productsForSale.prods.Remove(productsForSale.prods.Where(k => k.IDProduct == prd.IDProduct).FirstOrDefault());
                 }
             }
         }

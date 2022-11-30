@@ -4,18 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce5b1937abed470cbb962e7007cb655a" Name="Diagram1" ZoomLevel="53">
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.Order" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.PaymentType" Width="1.5" PointX="0.75" PointY="1.5" />
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.Product" Width="1.5" PointX="3" PointY="5.125" />
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.ProductSale" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.Tag" Width="1.5" PointX="5.25" PointY="5.5" />
-        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.vw_ProdTag" Width="1.5" PointX="7.75" PointY="3.75" />
-        <AssociationConnector Association="Tortuga_DobrodiyModel.FK_Order_Product" />
-        <AssociationConnector Association="Tortuga_DobrodiyModel.FK_Order_ProductSale" />
-        <AssociationConnector Association="Tortuga_DobrodiyModel.FK_ProductSale_PaymentType" />
-        <AssociationConnector Association="Tortuga_DobrodiyModel.ProductTag" />
+      <Diagram DiagramId="4b614350b899459084419295ae67a70f" Name="Diagram1">
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.Order" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.PaymentType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.Product" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.ProductSale" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.Tag" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.vw_prods" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.vw_ProdTag" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.vw_ProductsInProductSale" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tortuga_DobrodiyModel.vw_pss" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="Tortuga_DobrodiyModel.FK_Order_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Tortuga_DobrodiyModel.FK_Order_ProductSale" ManuallyRouted="false" />
+        <AssociationConnector Association="Tortuga_DobrodiyModel.FK_ProductSale_PaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="Tortuga_DobrodiyModel.ProductTag" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

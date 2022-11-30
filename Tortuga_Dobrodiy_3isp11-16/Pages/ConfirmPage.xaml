@@ -356,17 +356,84 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonStyle4" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="black" CornerRadius="10" BorderThickness="{TemplateBinding BorderThickness}" Background="white" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Page.Resources>
     <Grid Background="#e8e8e8">
         <Grid.RowDefinitions>
-            <RowDefinition Height="58"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="540"/>
+            <RowDefinition Height="112"/>
+            <RowDefinition Height="83"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="112"/>
         </Grid.RowDefinitions>
+
+        <Image Source="HeaderImage.png"
+               Stretch="Fill"/>
+        <Image Source="HeaderImage.png"
+               Grid.Row="3"
+               Stretch="Fill"/>
         <TextBlock
             Grid.Row="0"
-                Text="Оформление покупки"
+                Text="TortugaS"
+                FontSize="45"
+                VerticalAlignment="Top"
+                Margin="147 24 0 0" 
+                Width="240"
+                HorizontalAlignment="Left"
+                TextAlignment="Center"
+                Foreground="Black"
+                FontFamily="Algerian"/>
+
+        <Button Width="48"
+                Height="48"
+                HorizontalAlignment="Right"
+                Margin="0 32 18 32"
+                    x:Name="Back"
+                    Click="Back_Click" Style="{DynamicResource ButtonStyle4}">
+            <Image Source="TurnIcon.png"
+                   Height="24"
+                   Width="24"/>
+        </Button>
+
+        <TextBlock
+            Grid.Row="0"
+                Text="Оформление"
                 FontSize="20"
                 TextAlignment="Left"
                 VerticalAlignment="Top"
@@ -374,48 +441,46 @@
                 Foreground="Black"
                 />
 
-        <Button Style="{DynamicResource ButtonStyle2}"
-                x:Name="Back"
-                Height="34"
-                Width="48"
-                Content="назад"
-                Foreground="Black"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                Margin="0 24 24 0" Click="Back_Click" 
-                BorderBrush="{x:Null}" 
-                Background="Red"  
+
+        <Border Background="#000"
+                Grid.Row="1"
+                Grid.RowSpan="2"
                 />
+        <Image Source="backgroundImage.png"
+               Grid.Row="1"
+               Grid.RowSpan="2"/>
 
-        
 
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="3"
+                   HorizontalAlignment="Right"
+                   Height="112">
+            <StackPanel Height="64" Orientation="Horizontal"
+                        Margin="0 40 32 0">
+                <TextBlock Text="2646"
+                       FontSize="20" 
+                    FontWeight="Bold"
+                    x:Name="FinalCosttxt"/>
+                <TextBlock Text=" руб."
+                       FontSize="20"/>
+            </StackPanel>
 
-
-
-        <StackPanel  Grid.Row="3" Orientation="Horizontal">
-           
-            <Button Style="{DynamicResource ButtonStyle3}"
+            <Button Style="{DynamicResource ButtonStyle4}"
             x:Name="PayBtn"
             Content="Оформить"
             FontSize="16"
-            Width="150"
-            Height="70" 
+            Width="143"
+            Height="48" 
             Grid.Row="3"
             Background="GreenYellow" 
             BorderBrush="{x:Null}" 
             Foreground="Black"
-            HorizontalAlignment="Left"
-            Margin="16 0 0 0" Click="PayBtn_Click"
-            />
-
-            <TextBlock 
-                       FontSize="30"
-                       x:Name="FinalCosttxt"
-                       Margin="24 62 0 62"/>
-            <TextBlock Text=" руб."
-                       FontSize="30"
-                       Margin="0 62 0 62"/>
+            HorizontalAlignment="Right"
+            Margin="0 0 48 0" Click="PayBtn_Click"
+            VerticalAlignment="Center"/>
         </StackPanel>
+
+       
 
 
         <StackPanel 
@@ -427,7 +492,7 @@
                 >
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Укажите ваше имя и номер столика"
-                           />
+                           Foreground="white"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox
                     Text="Имя"
@@ -435,9 +500,8 @@
                 FontSize="16"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Left"
-                Padding="16"
                 Width="100"
-                Height="54"
+                Height="35"
                 Margin="0 12 10 0"
                 Background="#f8f8f8"
                 BorderBrush="Transparent"
@@ -452,9 +516,8 @@
                 FontSize="16"
                 VerticalContentAlignment="Center"
                 HorizontalAlignment="Left"
-                Padding="16"
                 Width="100"
-                Height="54"
+                Height="35"
                 Margin="10 12 10 0"
                 Background="#f8f8f8"
                 BorderBrush="Transparent"
@@ -463,7 +526,9 @@
 
                     <ComboBox x:Name="PaymentTypeCmbbx"
                               Width="200"
-                              FontSize="20"/>
+                              FontSize="20"
+                              Height="35"
+                              VerticalAlignment="Bottom"/>
                 </StackPanel>
 
 
@@ -473,10 +538,10 @@
         </StackPanel>
 
         <ListView x:Name="AllProducts"
-                  SelectedItem="{Binding products}"
+                  SelectedItem="{Binding prods}"
                   Grid.Row="2"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  
+                  Background="Transparent"
                   BorderBrush="Transparent" >
 
             <ListView.ItemsPanel>

@@ -64,6 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Calculating.cs" />
+    <Compile Include="Classes\Orders.cs" />
     <Compile Include="EF\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,7 +105,16 @@
     <Compile Include="EF\Tag.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\vw_prods.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\vw_ProdTag.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\vw_ProductsInProductSale.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\vw_pss.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\CartPage.xaml.cs">
@@ -118,27 +129,28 @@
     <Compile Include="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prods.cs" />
-    <Compile Include="productsForSale.cs" />
+    <Compile Include="Classes\Prods.cs" />
+    <Compile Include="Classes\productsForSale.cs" />
+    <Compile Include="Classes\PSs.cs" />
     <Compile Include="Win\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win\ProductSaleInfo.xaml.cs">
+      <DependentUpon>ProductSaleInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Win\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Win\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ClassEntities.cs" />
-    <Compile Include="Win\Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
+    <Compile Include="Classes\ClassEntities.cs" />
+    <Compile Include="Win\EmployeeWindow.xaml.cs">
+      <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Win\Window3.xaml.cs">
-      <DependentUpon>Window3.xaml</DependentUpon>
+    <Compile Include="Win\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\CartPage.xaml">
       <SubType>Designer</SubType>
@@ -160,19 +172,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Win\ProductSaleInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Win\StartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Win\EmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Win\Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Win\Window2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Win\Window3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,7 +226,22 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Pages\TurnIcon.png" />
+    <Resource Include="Pages\ItemBackground.png" />
+    <Resource Include="Win\ItemBackground.png" />
+    <Resource Include="Pages\backgroundImage.png" />
+    <Resource Include="Pages\cartIcon.png" />
+    <Resource Include="Pages\HeaderImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Win\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Win\TurnIcon.png" />
+    <Resource Include="Win\HeaderImage.png" />
+    <Resource Include="Win\backgroundImage.png" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="EF\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -226,12 +253,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Pages\TurnIcon.png" />
-    <Resource Include="Pages\ItemBackground.png" />
-    <Resource Include="Win\ItemBackground.png" />
-    <Resource Include="Pages\backgroundImage.png" />
-    <Resource Include="Pages\cartIcon.png" />
-    <Resource Include="Pages\HeaderImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

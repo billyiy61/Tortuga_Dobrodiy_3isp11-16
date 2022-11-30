@@ -27,6 +27,7 @@ namespace Tortuga_Dobrodiy_3isp11_16.EF
         public System.DateTime ReadyTime { get; set; }
         public string ClientName { get; set; }
         public decimal Price { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }

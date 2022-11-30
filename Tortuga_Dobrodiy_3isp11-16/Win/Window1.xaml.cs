@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CoffeeBar_Dobrodiy_2isp11_16.Win
+namespace Tortuga_Dobrodiy_3isp11_16.Win
 {
     /// <summary>
     /// Логика взаимодействия для Window1.xaml

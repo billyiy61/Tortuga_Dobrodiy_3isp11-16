@@ -45,7 +45,7 @@ namespace Tortuga_Dobrodiy_3isp11_16.Pages
             
 
             PaymentTypeCmbbx.ItemsSource = ptListStr;
-            AllProducts.ItemsSource = prods;
+            AllProducts.ItemsSource = productsForSale.prods.ToList();
 
             
            
@@ -56,7 +56,7 @@ namespace Tortuga_Dobrodiy_3isp11_16.Pages
             try
             {
                 
-                if (prods.Count != 0)
+                if (productsForSale.prods.Count() != 0)
                 {
                     EF.Order ord = new Order();
                     EF.ProductSale check = new ProductSale();
@@ -66,15 +66,15 @@ namespace Tortuga_Dobrodiy_3isp11_16.Pages
                     check.ReadyTime = DateTime.Now;
                     check.ClientName = txtClientName.Text;
                     check.Price = Convert.ToDecimal(FinalCosttxt.Text);
+                    check.IsActive = true;
 
                     context.ProductSale.Add(check);
                     context.SaveChanges();
 
-                    int n = prods.Count();
+                    int n = productsForSale.prods.Count();
 
-
-                    Prods[] prods1 = new Prods[prods.Count()];
-                    prods1 = prods.ToArray();
+                    Prods[] prods1 = new Prods[productsForSale.prods.Count()];
+                    prods1 = productsForSale.prods.ToArray();
 
                     for (int i = 0; i < n; i++)
                     {
